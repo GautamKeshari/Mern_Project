@@ -118,3 +118,7 @@ dist
 .pnp.*
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Node
+
+
+# Main-Dependency => npm i -D nodemon 
+# Dev-Dependency => it uses dusing the development ,we do not take it into production, We can see it in package.json
