@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 // https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj
-import { Jwt } from "jsonwebtoken"
+import { jwt } from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
 const userSchema=new mongoose.Schema({
@@ -46,14 +46,14 @@ const userSchema=new mongoose.Schema({
         type:String,
     }
 },{
-    timestamps: true      //
+    timestamps: true      
 })
 
 // now each time if password is changed then before saving bcrypt encrypts the password.
 userSchema.pre("save" ,async function(next){
     if(!this.isModified("password")) return next();
 
-    this.password=bcrypt.hash(this.password,10)
+    this.password=await bcrypt.hash(this.password,10)
     next()
 })
 
