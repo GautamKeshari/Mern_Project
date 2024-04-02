@@ -3,6 +3,9 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 // these cookieParser and cors configure after making app
 
+
+import userRouter from "./routes/user.routes.js"
+
 const app=express()
 app.use(cors({
     origin:process.env.CROS_ORIGIN,      //we have to specifically mention that from where our url is coming
@@ -17,9 +20,8 @@ app.use(express.urlencoded({extended:true, limit:"16kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-// routes import
-import userRouter from "./routes/user.routes.js"
 
+// routes import
 //routes declaration
 app.use("/api/v1/users",userRouter)
 

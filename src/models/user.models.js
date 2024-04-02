@@ -1,6 +1,7 @@
-import mongoose from "mongoose"
+import mongoose, { Schema } from "mongoose"
 // https://app.eraser.io/workspace/YtPqZ1VogxGy1jzIDkzj
-import { jwt } from "jsonwebtoken"
+import pkg from "jsonwebtoken";
+const { Jwt } =pkg;
 import bcrypt from "bcrypt"
 
 const userSchema=new mongoose.Schema({
@@ -34,7 +35,7 @@ const userSchema=new mongoose.Schema({
     },
     watchHistory: [
         {
-            types:Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref:"Video",
         }
     ],
@@ -64,7 +65,7 @@ userSchema.methods.isPasswordCorrect=
     }
 
 userSchema.methods.generateAccessToken=function(){
-    return jwt.sign(
+    return Jwt.sign(
         {
             _id:this._id,
             email:this.email,
@@ -77,7 +78,7 @@ userSchema.methods.generateAccessToken=function(){
     )
 }
 userSchema.methods.generateRefreshToken=function(){
-    return jwt.sign(
+    return Jwt.sign(
         {
             _id:this._id,
         },
